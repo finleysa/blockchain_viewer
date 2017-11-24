@@ -6,10 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'app';
-  myWallet: Object;
+  myWallet: any;
 
-  myCoinsEvent(wallet: Object) {
+  constructor() {
+    this.myWallet = [];
+  }
+
+  myCoinsEvent(wallet: Array<Object>) {
     this.myWallet = wallet;
   }
 }

@@ -16,26 +16,32 @@ export class DashComponent implements OnInit {
 
   constructor(private cmcService: CoinmarketcapService) {
     this.timerIntervalSeconds = 60;
+    this.myCoins = [];
   }
 
   ngOnInit() {
+    this.myCoinsEvent.emit(this.myCoins);
     this.updateCoins();
     setInterval(this.updateCoins.bind(this), 20000);
   }
 
   updateCoins() {
+    this.myCoins = JSON.parse(localStorage.getItem('myCoins'));
     this.cmcService.getPrices().subscribe(
       data => {
-        console.log(data);
         this.allCoins = data;
-        let temp = _.filter(data, (coin) => {
-          return (coin.id === 'ethereum'
-            || coin.id === 'bitcoin'
-            || coin.id === 'iconomi'
-            || coin.id === 'ethereum-classic');
+        _.map(this.allCoins, (n) => {
+          n.isMyCoin = false;
         });
-        this.myCoins = temp;
-        this.myCoinsEvent.emit(temp);
       });
+
+    this.myCoinsEvent.emit(this.myCoins);
+  }
+
+  toggleCoin(coin) {
+    console.log(coin);
+    this.myCoins.push(coin);
+    this.myCoinsEvent.emit(this.myCoins);
+    localStorage.setItem('myCoins', JSON.stringify(this.myCoins));
   }
 }

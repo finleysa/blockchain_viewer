@@ -6,9 +6,11 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./holdings.component.less']
 })
 export class HoldingsComponent implements OnInit {
-  @Input() wallet: Object;
+  @Input() wallet: any;
 
-  constructor() { }
+  constructor() {
+    this.wallet = [];
+  }
 
   ngOnInit() {
   }

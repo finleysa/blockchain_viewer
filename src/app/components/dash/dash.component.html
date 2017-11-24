@@ -10,8 +10,8 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let coin of myCoins; index as i">
-    <td>{{i + 1}}</td>
+  <tr *ngFor="let coin of allCoins; index as i">
+    <td><i class="fa fa-plus" aria-hidden="true" style="color: green" (click)="toggleCoin(coin)"></i></td>
     <td>{{coin.name}}</td>
     <td>{{coin.price_usd}}</td>
     <td [ngClass]="coin.percent_change_1h < 0 ? 'red-text' : 'green-text'">{{coin.percent_change_1h}}</td>

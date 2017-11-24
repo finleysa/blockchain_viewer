@@ -1,10 +1,11 @@
+<app-navbar></app-navbar>
 <div class="container">
   <div class="row">
-    <div class="col-lg-4">
-      <app-dash (myCoinsEvent)="myCoinsEvent($event)"></app-dash>
-    </div>
-    <div class="col-sm-8">
+    <div class="col-lg-7">
       <app-holdings [wallet]="myWallet" ></app-holdings>
+    </div>
+    <div class="col-lg-5">
+      <app-dash (myCoinsEvent)="myCoinsEvent($event)"></app-dash>
     </div>
   </div>
 </div>
