@@ -3,16 +3,25 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { DashComponent } from './components/dash/dash.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CoinmarketcapService } from './coinmarketcap.service';
+import { HoldingsComponent } from './components/holdings/holdings.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashComponent,
+    HoldingsComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    CoinmarketcapService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

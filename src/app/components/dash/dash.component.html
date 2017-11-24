@@ -1,0 +1,22 @@
+<table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Name</th>
+    <th scope="col">Price</th>
+    <th scope="col">1 hr Change</th>
+    <th scope="col">24 hr Change</th>
+    <th scope="col">7 Day Change</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let coin of myCoins; index as i">
+    <td>{{i + 1}}</td>
+    <td>{{coin.name}}</td>
+    <td>{{coin.price_usd}}</td>
+    <td [ngClass]="coin.percent_change_1h < 0 ? 'red-text' : 'green-text'">{{coin.percent_change_1h}}</td>
+    <td [ngClass]="coin.percent_change_24h < 0 ? 'red-text' : 'green-text'">{{coin.percent_change_24h}}</td>
+    <td [ngClass]="coin.percent_change_7d < 0 ? 'red-text' : 'green-text'">{{coin.percent_change_7d}}</td>
+  </tr>
+  </tbody>
+</table>
