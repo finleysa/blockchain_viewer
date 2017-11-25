@@ -1,3 +1,8 @@
+<div class="input-group margin-bottom-sm">
+  <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
+  <input [(ngModel)]="searchText" class="form-control" type="text" placeholder="Search">
+</div>
+
 <table class="table">
   <thead class="thead-dark">
   <tr>
@@ -10,8 +15,11 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let coin of allCoins; index as i">
-    <td><i class="fa fa-plus" aria-hidden="true" style="color: green" (click)="toggleCoin(coin)"></i></td>
+  <tr *ngFor="let coin of allCoins | filter : searchText">
+    <td><button (click)="toggleCoin(coin)">
+      <i *ngIf="!coin.isMyCoin" class="fa fa-plus" aria-hidden="true" style="color: green"></i>
+      <i *ngIf="coin.isMyCoin" class="fa fa-minus" aria-hidden="true" style="color: red"></i>
+    </button></td>
     <td>{{coin.name}}</td>
     <td>{{coin.price_usd}}</td>
     <td [ngClass]="coin.percent_change_1h < 0 ? 'red-text' : 'green-text'">{{coin.percent_change_1h}}</td>

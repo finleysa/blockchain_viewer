@@ -1,14 +1,10 @@
-<div  class="row" *ngIf="wallet">
-  <div class="col-sm-6 col-md-4" *ngFor="let coin of wallet">
-    <div class="thumbnail">
+<div  class="row" *ngIf="allCoins">
+  <div *ngFor="let coin of allCoins">
+    <div class="col-sm-6 col-md-4 thumbnail" *ngIf="coin.isMyCoin">
       <img src="/assets/{{coin.id}}.png" alt="...">
       <div class="caption">
         <h3>{{coin.name}}</h3>
         <h4>{{coin.price_usd}}</h4>
-        <p><a href="https://www.reddit.com/r/{{coin.id.replace('-', '')}}"
-              class="btn btn-primary" target="_blank" role="button">
-          /r/{{coin.id.replace('-', '')}}
-        </a></p>
       </div>
     </div>
   </div>

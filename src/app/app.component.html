@@ -1,11 +1,11 @@
-<app-navbar></app-navbar>
+<app-navbar (clearCoinStorage)="clearCoinStorageHandler()"></app-navbar>
 <div class="container">
   <div class="row">
     <div class="col-lg-7">
-      <app-holdings [wallet]="myWallet" ></app-holdings>
+      <app-holdings [allCoins]="allCoins" ></app-holdings>
     </div>
     <div class="col-lg-5">
-      <app-dash (myCoinsEvent)="myCoinsEvent($event)"></app-dash>
+      <app-dash [allCoins]="allCoins" (coinToggleEvent)="coinToggleHandler($event)"></app-dash>
     </div>
   </div>
 </div>
