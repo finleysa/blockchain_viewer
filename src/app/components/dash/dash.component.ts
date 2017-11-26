@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { CoinmarketcapService } from '../../coinmarketcap.service';
-import _ from 'lodash';
+import { CoinmarketcapService } from '../../services/coinmarketcap.service';
+import { Coin } from '../../models/coin';
+
+import * as numeral from 'numeral';
 
 @Component({
   selector: 'app-dash',
@@ -8,18 +10,15 @@ import _ from 'lodash';
   styleUrls: ['./dash.component.less']
 })
 export class DashComponent implements OnInit {
-  @Input() allCoins: any;
+  @Input() allCoins: Array<Coin>;
   @Output() coinToggleEvent = new EventEmitter();
-  timerIntervalSeconds: number;
 
 
   constructor(private cmcService: CoinmarketcapService) {
-    this.timerIntervalSeconds = 60;
   }
 
   ngOnInit() {
-    this.updateCoins();
-    setInterval(this.updateCoins.bind(this), 20000);
+
   }
 
   updateCoins() {
@@ -27,7 +26,12 @@ export class DashComponent implements OnInit {
   }
 
   toggleCoin(coin) {
+    console.log(coin.name)
     coin.isMyCoin = !coin.isMyCoin;
     this.coinToggleEvent.emit(coin);
+  }
+
+  moneyFormat(money: number) {
+    return numeral(money).format('$0,0.00');
   }
 }

@@ -4,7 +4,7 @@
 </div>
 
 <table class="table">
-  <thead class="thead-dark">
+  <thead>
   <tr>
     <th scope="col">#</th>
     <th scope="col">Name</th>
@@ -21,7 +21,7 @@
       <i *ngIf="coin.isMyCoin" class="fa fa-minus" aria-hidden="true" style="color: red"></i>
     </button></td>
     <td>{{coin.name}}</td>
-    <td>{{coin.price_usd}}</td>
+    <td>{{moneyFormat(coin.price_usd)}}</td>
     <td [ngClass]="coin.percent_change_1h < 0 ? 'red-text' : 'green-text'">{{coin.percent_change_1h}}</td>
     <td [ngClass]="coin.percent_change_24h < 0 ? 'red-text' : 'green-text'">{{coin.percent_change_24h}}</td>
     <td [ngClass]="coin.percent_change_7d < 0 ? 'red-text' : 'green-text'">{{coin.percent_change_7d}}</td>
