@@ -1,12 +1,14 @@
-<mat-menu #appMenu="matMenu">
-  <button mat-menu-item> Settings </button>
-  <button mat-menu-item> Help </button>
-</mat-menu>
+<mat-toolbar style="background-color: #181818; color: white;">
+  <span>Application Title</span>
+  <mat-menu #appMenu="matMenu">
+    <button mat-menu-item> Settings </button>
+    <button mat-menu-item> Help </button>
+  </mat-menu>
 
-<button mat-icon-button [matMenuTriggerFor]="appMenu">
-  <mat-icon>more_vert</mat-icon>
-</button>
-
+  <button mat-icon-button [matMenuTriggerFor]="appMenu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+</mat-toolbar>
 <!--<nav class="navbar navbar-inverse">-->
   <!--<div class="container-fluid">-->
     <!--<div class="navbar-header">-->

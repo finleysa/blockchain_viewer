@@ -12,8 +12,8 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatGridListModule, MatIconModule,
-  MatInputModule,
-  MatMenuModule, MatTableModule
+  MatInputModule, MatListModule,
+  MatMenuModule, MatTableModule, MatToolbarModule
 } from '@angular/material';
 
 
@@ -38,7 +38,9 @@ import {
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
-    MatCardModule
+    MatCardModule,
+    MatToolbarModule,
+    MatListModule
   ],
   providers: [
     CoinmarketcapService

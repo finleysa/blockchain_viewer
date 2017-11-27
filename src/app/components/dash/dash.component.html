@@ -1,10 +1,12 @@
 <div class="mat-container mat-elevation-z8">
 
-  <div class="search">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
-  </div>
+  <mat-card>
+    <div class="search">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+  </mat-card>
 
   <mat-table #table [dataSource]="dataSource">
 
@@ -37,17 +39,17 @@
     <!-- Color Column -->
     <ng-container matColumnDef="percent_change_1h">
       <mat-header-cell *matHeaderCellDef> 1hr change </mat-header-cell>
-      <mat-cell *matCellDef="let coin" [ngClass]="{coin.percent_change_1h > 0 ? 'text-green' : 'text-red'}"> {{coin.percent_change_1h}} </mat-cell>
+      <mat-cell *matCellDef="let coin" [ngClass]="coin.percent_change_1h < 0 ? 'red-text' : 'green-text'"> {{coin.percent_change_1h}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="percent_change_24h">
       <mat-header-cell *matHeaderCellDef> 24h Change </mat-header-cell>
-      <mat-cell *matCellDef="let coin"> {{coin.percent_change_24h}} </mat-cell>
+      <mat-cell *matCellDef="let coin" [ngClass]="coin.percent_change_24h < 0 ? 'red-text' : 'green-text'"> {{coin.percent_change_24h}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="percent_change_7d">
       <mat-header-cell *matHeaderCellDef> 7d Change </mat-header-cell>
-      <mat-cell *matCellDef="let coin"> {{coin.percent_change_7d}} </mat-cell>
+      <mat-cell *matCellDef="let coin" [ngClass]="coin.percent_change_7d < 0 ? 'red-text' : 'green-text'"> {{coin.percent_change_7d}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
