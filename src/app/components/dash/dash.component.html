@@ -1,30 +1,56 @@
-<div class="input-group margin-bottom-sm">
-  <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
-  <input [(ngModel)]="searchText" class="form-control" type="text" placeholder="Search">
-</div>
+<div class="mat-container mat-elevation-z8">
 
-<table class="table">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">Name</th>
-    <th scope="col">Price</th>
-    <th scope="col">1 hr Change</th>
-    <th scope="col">24 hr Change</th>
-    <th scope="col">7 Day Change</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let coin of allCoins | filter : searchText">
-    <td><button (click)="toggleCoin(coin)">
-      <i *ngIf="!coin.isMyCoin" class="fa fa-plus" aria-hidden="true" style="color: green"></i>
-      <i *ngIf="coin.isMyCoin" class="fa fa-minus" aria-hidden="true" style="color: red"></i>
-    </button></td>
-    <td>{{coin.name}}</td>
-    <td>{{moneyFormat(coin.price_usd)}}</td>
-    <td [ngClass]="coin.percent_change_1h < 0 ? 'red-text' : 'green-text'">{{coin.percent_change_1h}}</td>
-    <td [ngClass]="coin.percent_change_24h < 0 ? 'red-text' : 'green-text'">{{coin.percent_change_24h}}</td>
-    <td [ngClass]="coin.percent_change_7d < 0 ? 'red-text' : 'green-text'">{{coin.percent_change_7d}}</td>
-  </tr>
-  </tbody>
-</table>
+  <div class="search">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Add Column -->
+    <ng-container matColumnDef="add">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let coin">
+        <button (click)="toggleCoin(coin)">
+          <i *ngIf="!coin.isMyCoin" class="fa fa-plus" aria-hidden="true" style="color: green"></i>
+          <i *ngIf="coin.isMyCoin" class="fa fa-minus" aria-hidden="true" style="color: red"></i>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let coin"> {{coin.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+      <mat-cell *matCellDef="let coin"> {{coin.price_usd}} </mat-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="percent_change_1h">
+      <mat-header-cell *matHeaderCellDef> 1hr change </mat-header-cell>
+      <mat-cell *matCellDef="let coin" [ngClass]="{coin.percent_change_1h > 0 ? 'text-green' : 'text-red'}"> {{coin.percent_change_1h}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="percent_change_24h">
+      <mat-header-cell *matHeaderCellDef> 24h Change </mat-header-cell>
+      <mat-cell *matCellDef="let coin"> {{coin.percent_change_24h}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="percent_change_7d">
+      <mat-header-cell *matHeaderCellDef> 7d Change </mat-header-cell>
+      <mat-cell *matCellDef="let coin"> {{coin.percent_change_7d}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

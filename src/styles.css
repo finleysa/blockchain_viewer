@@ -1,4 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.mat-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.mat-scroll {
+  overflow: auto;
+  max-height: 500px;
+}
 
 .red-text {
   color: red;

@@ -1,21 +1,27 @@
-<h1 class="jumbo">{{moneys}}</h1>
+  <mat-card class="mat-elevation-z8">
+    <h1 class="jumbo">{{moneys}}</h1>
+  </mat-card>
 
-<div  class="row" *ngIf="allCoins">
-  <div *ngFor="let coin of allCoins">
-    <div class="media" *ngIf="coin.isMyCoin">
-      <div class="media-left">
-        <a href="#">
-          <img class="media-object" src="/assets/{{coin.id}}.png" alt="..." style="height: 60px; width: 60px;">
-        </a>
-      </div>
-      <div class="media-body">
-        <h4 class="media-heading">{{coin.name}}</h4>
-        <h4 class="media-heading">{{coin.price_usd}}</h4>
-        <ul class="list-group">
-          <li class="list-group-item"><input value="{{coin.amount_owned}}" type="text" (keyup)="multiply($event, coin)" placeholder="Owned Amount"></li>
-          <li *ngIf="coin.amount_owned && coin.amount_owned != 0" class="list-group-item">{{coin.amount_owned * coin.price_usd}}</li>
-        </ul>
+  <mat-card class="mat-container mat-scroll mat-elevation-z8">
+    <div *ngIf="allCoins">
+      <div *ngFor="let coin of allCoins">
+        <div class="media" *ngIf="coin.isMyCoin">
+          <div class="media-left">
+            <a href="#">
+              <img class="media-object" src="/assets/{{coin.id}}.png" alt="..." style="height: 60px; width: 60px;">
+            </a>
+          </div>
+          <div class="media- body">
+            <h4 class="media-heading">{{coin.name}}</h4>
+            <h4 class="media-heading">{{coin.price_usd}}</h4>
+            <ul class="list-group">
+              <mat-form-field>
+                <input matInput value="{{coin.amount_owned}}" type="text" (keyup)="multiply($event, coin)" placeholder="Owned Amount">
+              </mat-form-field>
+              <li *ngIf="coin.amount_owned && coin.amount_owned != 0" class="list-group-item">{{coin.amount_owned * coin.price_usd}}</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </mat-card>

@@ -15,7 +15,14 @@ export class HoldingsComponent implements OnInit, OnChanges {
   @Input()
   set allCoins(coins: Array<Coin>) {
     this._allCoins = coins;
-    this.totalMoneys();
+    let temp = 0;
+    _.map(this.allCoins, (n) => {
+      if (n.isMyCoin && n.amount_owned) {
+        temp += (n.amount_owned * n.price_usd);
+      }
+    });
+
+    this.moneys = numeral(temp).format('$0,0.00');
   }
 
   get allCoins() {

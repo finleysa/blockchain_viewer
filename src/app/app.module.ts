@@ -9,6 +9,12 @@ import { CoinmarketcapService } from './services/coinmarketcap.service';
 import { HoldingsComponent } from './components/holdings/holdings.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatGridListModule, MatIconModule,
+  MatInputModule,
+  MatMenuModule, MatTableModule
+} from '@angular/material';
 
 
 @NgModule({
@@ -22,7 +28,17 @@ import { FilterPipe } from './pipes/filter.pipe';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatMenuModule,
+    MatIconModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatCardModule
   ],
   providers: [
     CoinmarketcapService
