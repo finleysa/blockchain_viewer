@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/cmc', function(req, res, next) {
   let collection = db.db.collection('coin_market_cap');
-  collection.find().limit(100).sort({rank: -1}).toArray(function(err, results) {
+  collection.find().limit(100).sort({rank: -1, last_updated: -1}).toArray(function(err, results) {
     if (err) res.json(err);
     else res.send(results);
   });
