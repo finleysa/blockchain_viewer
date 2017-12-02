@@ -15,6 +15,7 @@ import {
   MatInputModule, MatListModule,
   MatMenuModule, MatTableModule, MatToolbarModule
 } from '@angular/material';
+import { HoldingComponent } from './components/holdings/holding/holding.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {
     DashComponent,
     HoldingsComponent,
     NavbarComponent,
-    FilterPipe
+    FilterPipe,
+    HoldingComponent
   ],
   imports: [
     BrowserModule,
