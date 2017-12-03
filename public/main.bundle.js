@@ -106,6 +106,7 @@ var AppComponent = (function () {
         localStorage.clear();
     };
     AppComponent.prototype.coinOwnedHandler = function (coin) {
+        console.log('app component', coin);
         __WEBPACK_IMPORTED_MODULE_2_lodash___default.a.map(this.savedCoins, function (n) {
             if (n.id === coin.id) {
                 n.amount_owned = coin.amount_owned;
@@ -160,12 +161,14 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pipes_filter_pipe__ = __webpack_require__("../../../../../src/app/pipes/filter.pipe.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_platform_browser_animations__ = __webpack_require__("../../../platform-browser/esm5/animations.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_holdings_holding_holding_component__ = __webpack_require__("../../../../../src/app/components/holdings/holding/holding.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -188,7 +191,8 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_4__components_dash_dash_component__["a" /* DashComponent */],
                 __WEBPACK_IMPORTED_MODULE_7__components_holdings_holdings_component__["a" /* HoldingsComponent */],
                 __WEBPACK_IMPORTED_MODULE_8__components_navbar_navbar_component__["a" /* NavbarComponent */],
-                __WEBPACK_IMPORTED_MODULE_9__pipes_filter_pipe__["a" /* FilterPipe */]
+                __WEBPACK_IMPORTED_MODULE_9__pipes_filter_pipe__["a" /* FilterPipe */],
+                __WEBPACK_IMPORTED_MODULE_12__components_holdings_holding_holding_component__["a" /* HoldingComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -322,10 +326,88 @@ var DashComponent = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/components/holdings/holding/holding.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<mat-grid-list *ngIf=\"coin.isMyCoin\" cols=\"4\" rowHeight=\"2:1\">\n\n  <mat-grid-tile colspan=\"1\">\n    <div class=\"media-left\">\n      <a href=\"#\">\n        <img class=\"media-object\" src=\"/assets/{{coin.id}}.png\" alt=\"...\" style=\"height: 60px; width: 60px;\">\n      </a>\n    </div>\n    <div class=\"media- body\">\n      <h4 class=\"media-heading\">{{coin.name}}</h4>\n      <h4 class=\"media-heading\">{{coin.price_usd}}</h4>\n    </div>\n  </mat-grid-tile>\n\n  <mat-grid-tile colspan=\"2\">\n\n    <mat-list-item>\n      <mat-form-field>\n        <input matInput value=\"{{coin.amount_owned}}\" type=\"text\" (keyup)=\"multiply($event, coin)\" placeholder=\"Owned Amount\">\n      </mat-form-field>\n    </mat-list-item>\n\n    <mat-list-item *ngIf=\"coin.amount_owned && coin.amount_owned != 0\">\n      {{coin.amount_owned * coin.price_usd}}\n    </mat-list-item>\n\n  </mat-grid-tile>\n\n</mat-grid-list>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/holdings/holding/holding.component.less":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/holdings/holding/holding.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HoldingComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_coin__ = __webpack_require__("../../../../../src/app/models/coin.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var HoldingComponent = (function () {
+    function HoldingComponent() {
+        this.coinOwnedEvent = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
+    }
+    HoldingComponent.prototype.ngOnInit = function () {
+    };
+    HoldingComponent.prototype.multiply = function (e, coin) {
+        console.log(e.target.value);
+        if (e.target.value > 0) {
+            coin.amount_owned = e.target.value;
+        }
+        else {
+            coin.amount_owned = null;
+        }
+        this.coinOwnedEvent.emit(coin);
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Input */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__models_coin__["a" /* Coin */])
+    ], HoldingComponent.prototype, "coin", void 0);
+    HoldingComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'app-holding',
+            template: __webpack_require__("../../../../../src/app/components/holdings/holding/holding.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/components/holdings/holding/holding.component.less")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], HoldingComponent);
+    return HoldingComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/components/holdings/holdings.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "  <mat-card class=\"mat-elevation-z8\">\n    <h1 class=\"jumbo\">{{moneys}}</h1>\n  </mat-card>\n\n  <mat-card class=\"mat-container mat-scroll mat-elevation-z8\">\n    <div *ngIf=\"allCoins\">\n      <div *ngFor=\"let coin of allCoins\">\n        <div class=\"media\" *ngIf=\"coin.isMyCoin\">\n          <div class=\"media-left\">\n            <a href=\"#\">\n              <img class=\"media-object\" src=\"/assets/{{coin.id}}.png\" alt=\"...\" style=\"height: 60px; width: 60px;\">\n            </a>\n          </div>\n          <div class=\"media- body\">\n            <h4 class=\"media-heading\">{{coin.name}}</h4>\n            <h4 class=\"media-heading\">{{coin.price_usd}}</h4>\n            <mat-list>\n              <mat-list-item>\n                <mat-form-field>\n                  <input matInput value=\"{{coin.amount_owned}}\" type=\"text\" (keyup)=\"multiply($event, coin)\" placeholder=\"Owned Amount\">\n                </mat-form-field>\n              </mat-list-item>\n              <mat-list-item *ngIf=\"coin.amount_owned && coin.amount_owned != 0\">\n                {{coin.amount_owned * coin.price_usd}}\n              </mat-list-item>\n            </mat-list>\n          </div>\n        </div>\n      </div>\n    </div>\n  </mat-card>\n"
+module.exports = "  <mat-card class=\"mat-elevation-z8\">\n    <h1 class=\"jumbo\">{{moneys}}</h1>\n  </mat-card>\n\n  <mat-card class=\"mat-container mat-scroll mat-elevation-z8\">\n    <div *ngIf=\"allCoins\">\n        <app-holding *ngFor=\"let coin of allCoins\"[coin]=\"coin\" (coinOwnedEvent)=\"emitCoin(coin)\"></app-holding>\n    </div>\n  </mat-card>\n"
 
 /***/ }),
 
@@ -411,13 +493,9 @@ var HoldingsComponent = (function () {
         });
         this.moneys = __WEBPACK_IMPORTED_MODULE_2_numeral__(temp).format('$0,0.00');
     };
-    HoldingsComponent.prototype.multiply = function (e, coin) {
-        if (e.target.value > 0) {
-            coin.amount_owned = e.target.value;
-        }
-        else {
-            coin.amount_owned = null;
-        }
+    HoldingsComponent.prototype.emitCoin = function (coin) {
+        console.log('emitting');
+        console.log(coin);
         this.totalMoneys();
         this.coinOwnedEvent.emit(coin);
     };
@@ -509,6 +587,36 @@ var NavbarComponent = (function () {
         __metadata("design:paramtypes", [])
     ], NavbarComponent);
     return NavbarComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/models/coin.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Coin; });
+var Coin = (function () {
+    function Coin(newCoin) {
+        this.id = newCoin.id;
+        this.name = newCoin.name;
+        this.symbol = newCoin.symbol;
+        this.rank = newCoin.rank;
+        this.price_usd = newCoin.price_usd;
+        this.price_btc = newCoin.price_btc;
+        // this.twofour_hr_volume_usd = newCoin.24h_volume_usd;
+        this.market_cap_usd = newCoin.arket_cap_usd;
+        this.available_supply = newCoin.available_supply;
+        this.total_supply = newCoin.total_supply;
+        this.max_supply = newCoin.max_supply;
+        this.percent_change_1h = newCoin.percent_change_1h;
+        this.percent_change_24h = newCoin.percent_change_24h;
+        this.percent_change_7d = newCoin.percent_change_7d;
+        this.last_update = newCoin.last_update;
+    }
+    return Coin;
 }());
 
 

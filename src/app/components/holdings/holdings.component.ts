@@ -29,7 +29,6 @@ export class HoldingsComponent implements OnInit, OnChanges {
     return this._allCoins;
   }
 
-
   @Output() coinOwnedEvent = new EventEmitter();
   moneys: string;
 
@@ -62,15 +61,10 @@ export class HoldingsComponent implements OnInit, OnChanges {
     this.moneys = numeral(temp).format('$0,0.00');
   }
 
-  multiply(e, coin: Coin) {
-    if (e.target.value > 0) {
-      coin.amount_owned = e.target.value;
-    } else {
-      coin.amount_owned = null;
-    }
-
-
-    this.totalMoneys()
+  emitCoin(coin: Coin) {
+    console.log('emitting');
+    console.log(coin);
+    this.totalMoneys();
     this.coinOwnedEvent.emit(coin);
   }
 }
