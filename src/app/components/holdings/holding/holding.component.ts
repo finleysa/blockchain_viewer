@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Coin} from '../../../models/coin';
 
 @Component({
@@ -8,7 +8,7 @@ import {Coin} from '../../../models/coin';
 })
 export class HoldingComponent implements OnInit {
   @Input() coin: Coin;
-  coinOwnedEvent = new EventEmitter();
+  @Output() coinOwnedEvent = new EventEmitter();
 
   constructor() {
   }
@@ -17,7 +17,6 @@ export class HoldingComponent implements OnInit {
   }
 
   multiply(e, coin: Coin) {
-    console.log(e.target.value);
     if (e.target.value > 0) {
       coin.amount_owned = e.target.value;
     } else {

@@ -42,7 +42,8 @@ import { HoldingComponent } from './components/holdings/holding/holding.componen
     MatTableModule,
     MatCardModule,
     MatToolbarModule,
-    MatListModule
+    MatListModule,
+    MatCheckboxModule
   ],
   providers: [
     CoinmarketcapService

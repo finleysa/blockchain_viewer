@@ -60,7 +60,6 @@ export class AppComponent implements OnInit {
   }
 
   coinOwnedHandler(coin: Coin): void {
-    console.log('app component', coin)
     _.map(this.savedCoins, (n: Coin) => {
       if (n.id === coin.id) {
         n.amount_owned = coin.amount_owned;

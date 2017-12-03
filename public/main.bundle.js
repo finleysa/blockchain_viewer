@@ -106,7 +106,6 @@ var AppComponent = (function () {
         localStorage.clear();
     };
     AppComponent.prototype.coinOwnedHandler = function (coin) {
-        console.log('app component', coin);
         __WEBPACK_IMPORTED_MODULE_2_lodash___default.a.map(this.savedCoins, function (n) {
             if (n.id === coin.id) {
                 n.amount_owned = coin.amount_owned;
@@ -209,7 +208,8 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_11__angular_material__["k" /* MatTableModule */],
                 __WEBPACK_IMPORTED_MODULE_11__angular_material__["b" /* MatCardModule */],
                 __WEBPACK_IMPORTED_MODULE_11__angular_material__["l" /* MatToolbarModule */],
-                __WEBPACK_IMPORTED_MODULE_11__angular_material__["h" /* MatListModule */]
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["h" /* MatListModule */],
+                __WEBPACK_IMPORTED_MODULE_11__angular_material__["c" /* MatCheckboxModule */]
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_6__services_coinmarketcap_service__["a" /* CoinmarketcapService */]
@@ -227,7 +227,7 @@ var AppModule = (function () {
 /***/ "../../../../../src/app/components/dash/dash.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"mat-container mat-elevation-z8\">\n\n  <mat-card>\n    <div class=\"search\">\n      <mat-form-field>\n        <input matInput (keyup)=\"applyFilter($event.target.value)\" placeholder=\"Filter\">\n      </mat-form-field>\n    </div>\n  </mat-card>\n\n  <mat-table #table [dataSource]=\"dataSource\">\n\n    <!--- Note that these columns can be defined in any order.\n          The actual rendered columns are set as a property on the row definition\" -->\n\n    <!-- Add Column -->\n    <ng-container matColumnDef=\"add\">\n      <mat-header-cell *matHeaderCellDef></mat-header-cell>\n      <mat-cell *matCellDef=\"let coin\">\n        <button (click)=\"toggleCoin(coin)\">\n          <i *ngIf=\"!coin.isMyCoin\" class=\"fa fa-plus\" aria-hidden=\"true\" style=\"color: green\"></i>\n          <i *ngIf=\"coin.isMyCoin\" class=\"fa fa-minus\" aria-hidden=\"true\" style=\"color: red\"></i>\n        </button>\n      </mat-cell>\n    </ng-container>\n\n    <!-- Name Column -->\n    <ng-container matColumnDef=\"name\">\n      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>\n      <mat-cell *matCellDef=\"let coin\"> {{coin.name}} </mat-cell>\n    </ng-container>\n\n    <!-- Weight Column -->\n    <ng-container matColumnDef=\"price\">\n      <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>\n      <mat-cell *matCellDef=\"let coin\"> {{coin.price_usd}} </mat-cell>\n    </ng-container>\n\n    <!-- Color Column -->\n    <ng-container matColumnDef=\"percent_change_1h\">\n      <mat-header-cell *matHeaderCellDef> 1hr change </mat-header-cell>\n      <mat-cell *matCellDef=\"let coin\" [ngClass]=\"coin.percent_change_1h < 0 ? 'red-text' : 'green-text'\"> {{coin.percent_change_1h}} </mat-cell>\n    </ng-container>\n\n    <ng-container matColumnDef=\"percent_change_24h\">\n      <mat-header-cell *matHeaderCellDef> 24h Change </mat-header-cell>\n      <mat-cell *matCellDef=\"let coin\" [ngClass]=\"coin.percent_change_24h < 0 ? 'red-text' : 'green-text'\"> {{coin.percent_change_24h}} </mat-cell>\n    </ng-container>\n\n    <ng-container matColumnDef=\"percent_change_7d\">\n      <mat-header-cell *matHeaderCellDef> 7d Change </mat-header-cell>\n      <mat-cell *matCellDef=\"let coin\" [ngClass]=\"coin.percent_change_7d < 0 ? 'red-text' : 'green-text'\"> {{coin.percent_change_7d}} </mat-cell>\n    </ng-container>\n\n    <mat-header-row *matHeaderRowDef=\"displayedColumns\"></mat-header-row>\n    <mat-row *matRowDef=\"let row; columns: displayedColumns;\"></mat-row>\n  </mat-table>\n</div>\n"
+module.exports = "<div class=\"mat-container mat-elevation-z8\">\n\n  <mat-card>\n    <div class=\"search\">\n      <mat-form-field>\n        <input matInput (keyup)=\"applyFilter($event.target.value)\" [disabled]=\"checked\" placeholder=\"Filter\">\n      </mat-form-field>\n      <mat-checkbox [(ngModel)]=\"checked\">Show Checked Only</mat-checkbox>\n    </div>\n  </mat-card>\n\n  <mat-table #table [dataSource]=\"dataSource\">\n\n    <ng-container matColumnDef=\"add\">\n      <mat-header-cell *matHeaderCellDef></mat-header-cell>\n      <mat-cell *matCellDef=\"let coin\">\n        <button (click)=\"toggleCoin(coin)\">\n          <i *ngIf=\"!coin.isMyCoin\" class=\"fa fa-plus\" aria-hidden=\"true\" style=\"color: green\"></i>\n          <i *ngIf=\"coin.isMyCoin\" class=\"fa fa-minus\" aria-hidden=\"true\" style=\"color: red\"></i>\n        </button>\n      </mat-cell>\n    </ng-container>\n\n    <!-- Name Column -->\n    <ng-container matColumnDef=\"name\">\n      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>\n      <mat-cell *matCellDef=\"let coin\"> {{coin.name}} </mat-cell>\n    </ng-container>\n\n    <!-- Weight Column -->\n    <ng-container matColumnDef=\"price\">\n      <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>\n      <mat-cell *matCellDef=\"let coin\"> {{coin.price_usd}} </mat-cell>\n    </ng-container>\n\n    <!-- Color Column -->\n    <ng-container matColumnDef=\"percent_change_1h\">\n      <mat-header-cell *matHeaderCellDef> 1hr change </mat-header-cell>\n      <mat-cell *matCellDef=\"let coin\" [ngClass]=\"coin.percent_change_1h < 0 ? 'red-text' : 'green-text'\"> {{coin.percent_change_1h}} </mat-cell>\n    </ng-container>\n\n    <ng-container matColumnDef=\"percent_change_24h\">\n      <mat-header-cell *matHeaderCellDef> 24h Change </mat-header-cell>\n      <mat-cell *matCellDef=\"let coin\" [ngClass]=\"coin.percent_change_24h < 0 ? 'red-text' : 'green-text'\"> {{coin.percent_change_24h}} </mat-cell>\n    </ng-container>\n\n    <ng-container matColumnDef=\"percent_change_7d\">\n      <mat-header-cell *matHeaderCellDef> 7d Change </mat-header-cell>\n      <mat-cell *matCellDef=\"let coin\" [ngClass]=\"coin.percent_change_7d < 0 ? 'red-text' : 'green-text'\"> {{coin.percent_change_7d}} </mat-cell>\n    </ng-container>\n\n    <mat-header-row *matHeaderRowDef=\"displayedColumns\"></mat-header-row>\n    <mat-row *matRowDef=\"let row; columns: displayedColumns;\"></mat-row>\n  </mat-table>\n</div>\n"
 
 /***/ }),
 
@@ -272,6 +272,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var DashComponent = (function () {
     function DashComponent() {
+        this._checked = false;
+        this.updateCount = 0;
         this.coinToggleEvent = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
         this.displayedColumns = ['add', 'name', 'price', 'percent_change_1h', 'percent_change_24h', 'percent_change_7d'];
         this.dataSource = new __WEBPACK_IMPORTED_MODULE_1__angular_material__["j" /* MatTableDataSource */](this._allCoins);
@@ -282,7 +284,27 @@ var DashComponent = (function () {
         },
         set: function (coins) {
             this._allCoins = coins;
-            this.dataSource = new __WEBPACK_IMPORTED_MODULE_1__angular_material__["j" /* MatTableDataSource */](this._allCoins);
+            if (this.updateCount <= 2) {
+                this.updateCount++;
+                this.dataSource = new __WEBPACK_IMPORTED_MODULE_1__angular_material__["j" /* MatTableDataSource */](this._allCoins);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DashComponent.prototype, "checked", {
+        get: function () {
+            return this._checked;
+        },
+        set: function (checked) {
+            console.log(checked);
+            if (checked) {
+                this.dataSource.filter = 'true';
+            }
+            else {
+                this.dataSource.filter = null;
+            }
+            this._checked = checked;
         },
         enumerable: true,
         configurable: true
@@ -301,6 +323,9 @@ var DashComponent = (function () {
     };
     DashComponent.prototype.moneyFormat = function (money) {
         return __WEBPACK_IMPORTED_MODULE_2_numeral__(money).format('$0,0.00');
+    };
+    DashComponent.prototype.myCoinsOnly = function () {
+        console.log("only");
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Output */])(),
@@ -329,7 +354,7 @@ var DashComponent = (function () {
 /***/ "../../../../../src/app/components/holdings/holding/holding.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-grid-list *ngIf=\"coin.isMyCoin\" cols=\"4\" rowHeight=\"2:1\">\n\n  <mat-grid-tile colspan=\"1\">\n    <div class=\"media-left\">\n      <a href=\"#\">\n        <img class=\"media-object\" src=\"/assets/{{coin.id}}.png\" alt=\"...\" style=\"height: 60px; width: 60px;\">\n      </a>\n    </div>\n    <div class=\"media- body\">\n      <h4 class=\"media-heading\">{{coin.name}}</h4>\n      <h4 class=\"media-heading\">{{coin.price_usd}}</h4>\n    </div>\n  </mat-grid-tile>\n\n  <mat-grid-tile colspan=\"2\">\n\n    <mat-list-item>\n      <mat-form-field>\n        <input matInput value=\"{{coin.amount_owned}}\" type=\"text\" (keyup)=\"multiply($event, coin)\" placeholder=\"Owned Amount\">\n      </mat-form-field>\n    </mat-list-item>\n\n    <mat-list-item *ngIf=\"coin.amount_owned && coin.amount_owned != 0\">\n      {{coin.amount_owned * coin.price_usd}}\n    </mat-list-item>\n\n  </mat-grid-tile>\n\n</mat-grid-list>\n"
+module.exports = "<mat-grid-list *ngIf=\"coin.isMyCoin\" cols=\"4\" rowHeight=\"2:1\">\n\n  <mat-grid-tile colspan=\"2\">\n    <div class=\"media-left\">\n      <a href=\"#\">\n        <img class=\"media-object\" src=\"/assets/{{coin.id}}.png\" alt=\"...\" style=\"height: 5em; width: 5em;\">\n      </a>\n    </div>\n    <div class=\"media- body\">\n      <h4 class=\"media-heading\">{{coin.name}}</h4>\n      <h4 class=\"media-heading\">{{coin.price_usd}}</h4>\n    </div>\n  </mat-grid-tile>\n\n  <mat-grid-tile colspan=\"1\">\n\n    <mat-list-item>\n      <mat-form-field>\n        <input matInput value=\"{{coin.amount_owned}}\" type=\"text\" (keyup)=\"multiply($event, coin)\" placeholder=\"Owned Amount\">\n      </mat-form-field>\n    </mat-list-item>\n  </mat-grid-tile>\n\n  <mat-grid-tile colspan=\"1\">\n\n    <mat-list-item *ngIf=\"coin.amount_owned && coin.amount_owned != 0\">\n      {{coin.amount_owned * coin.price_usd}}\n    </mat-list-item>\n\n  </mat-grid-tile>\n\n</mat-grid-list>\n"
 
 /***/ }),
 
@@ -376,7 +401,6 @@ var HoldingComponent = (function () {
     HoldingComponent.prototype.ngOnInit = function () {
     };
     HoldingComponent.prototype.multiply = function (e, coin) {
-        console.log(e.target.value);
         if (e.target.value > 0) {
             coin.amount_owned = e.target.value;
         }
@@ -389,6 +413,10 @@ var HoldingComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Input */])(),
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__models_coin__["a" /* Coin */])
     ], HoldingComponent.prototype, "coin", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Output */])(),
+        __metadata("design:type", Object)
+    ], HoldingComponent.prototype, "coinOwnedEvent", void 0);
     HoldingComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'app-holding',
@@ -482,8 +510,6 @@ var HoldingsComponent = (function () {
             }
         }, 100);
     };
-    HoldingsComponent.prototype.ngOnChanges = function (changes) {
-    };
     HoldingsComponent.prototype.totalMoneys = function () {
         var temp = 0;
         __WEBPACK_IMPORTED_MODULE_1_lodash___default.a.map(this.allCoins, function (n) {
@@ -494,8 +520,6 @@ var HoldingsComponent = (function () {
         this.moneys = __WEBPACK_IMPORTED_MODULE_2_numeral__(temp).format('$0,0.00');
     };
     HoldingsComponent.prototype.emitCoin = function (coin) {
-        console.log('emitting');
-        console.log(coin);
         this.totalMoneys();
         this.coinOwnedEvent.emit(coin);
     };
@@ -526,7 +550,7 @@ var HoldingsComponent = (function () {
 /***/ "../../../../../src/app/components/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar style=\"background-color: #181818; color: white;\">\n  <span>Application Title</span>\n  <mat-menu #appMenu=\"matMenu\">\n    <button mat-menu-item> Settings </button>\n    <button mat-menu-item> Help </button>\n  </mat-menu>\n\n  <button mat-icon-button [matMenuTriggerFor]=\"appMenu\">\n    <mat-icon>more_vert</mat-icon>\n  </button>\n</mat-toolbar>\n<!--<nav class=\"navbar navbar-inverse\">-->\n  <!--<div class=\"container-fluid\">-->\n    <!--<div class=\"navbar-header\">-->\n      <!--<button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">-->\n        <!--<span class=\"sr-only\">Toggle navigation</span>-->\n        <!--<span class=\"icon-bar\"></span>-->\n        <!--<span class=\"icon-bar\"></span>-->\n        <!--<span class=\"icon-bar\"></span>-->\n      <!--</button>-->\n      <!--<a class=\"navbar-brand\" href=\"#\">Brand</a>-->\n    <!--</div>-->\n    <!--<div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">-->\n      <!--<ul class=\"nav navbar-nav\">-->\n        <!--<li><a href=\"#\" class=\"pull-right btn\" (click)=\"clearStorage()\">CLEAR</a></li>-->\n      <!--</ul>-->\n    <!--</div>-->\n  <!--</div>-->\n<!--</nav>-->\n"
+module.exports = "<mat-toolbar style=\"background-color: #181818; color: white;\">\n  <span>Crypto Dashboard</span>\n  <mat-menu #appMenu=\"matMenu\">\n    <button mat-menu-item> Settings </button>\n    <button mat-menu-item> Help </button>\n  </mat-menu>\n\n  <button mat-icon-button [matMenuTriggerFor]=\"appMenu\">\n    <mat-icon>more_vert</mat-icon>\n  </button>\n</mat-toolbar>\n<!--<nav class=\"navbar navbar-inverse\">-->\n  <!--<div class=\"container-fluid\">-->\n    <!--<div class=\"navbar-header\">-->\n      <!--<button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">-->\n        <!--<span class=\"sr-only\">Toggle navigation</span>-->\n        <!--<span class=\"icon-bar\"></span>-->\n        <!--<span class=\"icon-bar\"></span>-->\n        <!--<span class=\"icon-bar\"></span>-->\n      <!--</button>-->\n      <!--<a class=\"navbar-brand\" href=\"#\">Brand</a>-->\n    <!--</div>-->\n    <!--<div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">-->\n      <!--<ul class=\"nav navbar-nav\">-->\n        <!--<li><a href=\"#\" class=\"pull-right btn\" (click)=\"clearStorage()\">CLEAR</a></li>-->\n      <!--</ul>-->\n    <!--</div>-->\n  <!--</div>-->\n<!--</nav>-->\n"
 
 /***/ }),
 

@@ -9,7 +9,7 @@ import * as numeral from 'numeral';
   templateUrl: './holdings.component.html',
   styleUrls: ['./holdings.component.less']
 })
-export class HoldingsComponent implements OnInit, OnChanges {
+export class HoldingsComponent implements OnInit {
   private _allCoins: Array<Coin>;
 
   @Input()
@@ -47,9 +47,6 @@ export class HoldingsComponent implements OnInit, OnChanges {
       }, 100);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-  }
-
   totalMoneys() {
     let temp = 0;
     _.map(this.allCoins, (n) => {
@@ -62,8 +59,6 @@ export class HoldingsComponent implements OnInit, OnChanges {
   }
 
   emitCoin(coin: Coin) {
-    console.log('emitting');
-    console.log(coin);
     this.totalMoneys();
     this.coinOwnedEvent.emit(coin);
   }
