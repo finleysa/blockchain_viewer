@@ -4,6 +4,6 @@
 
   <mat-card class="mat-container mat-scroll mat-elevation-z8">
     <div *ngIf="allCoins">
-        <app-holding *ngFor="let coin of allCoins"[coin]="coin" (coinOwnedEvent)="emitCoin(coin)"></app-holding>
+      <app-holding *ngFor="let coin of allCoins"[coin]="coin" (coinOwnedEvent)="emitCoin(coin)"></app-holding>
     </div>
   </mat-card>

@@ -35,7 +35,7 @@ app.listen(port, ()=> {
 });
 
 app.get('/', (req, res) => {
-  res.sendFile('index.html');
+  res.send('index.html');
 });
 
 app.use('/users', users);

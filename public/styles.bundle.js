@@ -139,7 +139,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 exports.i(__webpack_require__("../../../../css-loader/index.js?{\"sourceMap\":false,\"importLoaders\":1}!../../../../postcss-loader/index.js?{\"ident\":\"postcss\"}!../../../material/prebuilt-themes/indigo-pink.css"), "");
 
 // module
-exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n\n.mat-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  min-width: 300px;\n}\n\n.mat-scroll {\n  overflow: auto;\n  max-height: 500px;\n}\n\n.red-text {\n  color: red;\n}\n\n.green-text {\n  color: green;\n}\n", ""]);
+exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n\n.mat-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  min-width: 300px;\n}\n\n.mat-scroll {\n  overflow: auto;\n  max-height: 500px;\n}\n\n.red-text {\n  color: red;\n}\n\n.green-text {\n  color: green;\n}\n\n.margin-5-bottom {\n  margin-bottom: 5px;\n}\n\n.margin-10-bottom {\n  margin-bottom: 10px;\n}\n\n.margin-15-bottom {\n  margin-bottom: 15px;\n}\n\n.margin-5-top {\n  margin-top: 5px;\n}\n\n.margin-10-top {\n  margin-top: 10px;\n}\n\n.margin-15-top {\n  margin-top: 15px;\n}\n", ""]);
 
 // exports
 
