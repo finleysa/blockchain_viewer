@@ -1,9 +1,14 @@
-  <mat-card class="mat-elevation-z8">
-    <h1 class="jumbo">{{moneys}}</h1>
-  </mat-card>
+<div class="row">
+  <div class="col-sm-12">
 
-  <mat-card class="mat-container mat-scroll mat-elevation-z8">
-    <div *ngIf="allCoins">
-      <app-holding *ngFor="let coin of allCoins"[coin]="coin" (coinOwnedEvent)="emitCoin(coin)"></app-holding>
-    </div>
-  </mat-card>
+    <mat-card class="mat-elevation-z8">
+      <h1 class="jumbo">{{moneys}}</h1>
+    </mat-card>
+
+    <mat-card class="mat-container mat-scroll mat-elevation-z8">
+      <div *ngIf="allCoins">
+        <app-holding *ngFor="let coin of allCoins"[coin]="coin" (coinOwnedEvent)="emitCoin(coin)"></app-holding>
+      </div>
+    </mat-card>
+  </div>
+</div>
