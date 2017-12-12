@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Coin} from '../../../models/coin';
+import * as numeral from 'numeral';
 
 @Component({
   selector: 'app-holding',
@@ -24,5 +25,9 @@ export class HoldingComponent implements OnInit {
     }
 
     this.coinOwnedEvent.emit(coin);
+  }
+
+  formatMoney(coin: Coin) {
+    return numeral(coin.amount_owned * coin.price_usd).format('$0,0.00');
   }
 }

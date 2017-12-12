@@ -26,7 +26,7 @@
       <div class="col-sm-6">
 
         <mat-list-item *ngIf="coin.amount_owned && coin.amount_owned != 0">
-          {{coin.amount_owned * coin.price_usd}}
+          {{formatMoney(coin)}}
         </mat-list-item>
 
       </div>

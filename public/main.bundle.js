@@ -354,7 +354,7 @@ var DashComponent = (function () {
 /***/ "../../../../../src/app/components/holdings/holding/holding.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"coin.isMyCoin\" class=\"row margin-10-bottom\">\n\n  <div class=\"col-sm-6\">\n    <div class=\"media-left\">\n      <a href=\"#\">\n        <img class=\"media-object\" src=\"/assets/{{coin.id}}.png\" alt=\"...\" style=\"height: 5em; width: 5em;\">\n      </a>\n    </div>\n    <div class=\"media- body\">\n      <h4 class=\"media-heading\">{{coin.name}}</h4>\n      <h4 class=\"media-heading\">{{coin.price_usd}}</h4>\n    </div>\n  </div>\n\n  <div class=\"col-sm-6\">\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n\n        <mat-list-item>\n          <mat-form-field>\n            <input matInput value=\"{{coin.amount_owned}}\" type=\"text\" (keyup)=\"multiply($event, coin)\" placeholder=\"Owned Amount\">\n          </mat-form-field>\n        </mat-list-item>\n\n      </div>\n      <div class=\"col-sm-6\">\n\n        <mat-list-item *ngIf=\"coin.amount_owned && coin.amount_owned != 0\">\n          {{coin.amount_owned * coin.price_usd}}\n        </mat-list-item>\n\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div *ngIf=\"coin.isMyCoin\" class=\"row margin-10-bottom\">\n\n  <div class=\"col-sm-6\">\n    <div class=\"media-left\">\n      <a href=\"#\">\n        <img class=\"media-object\" src=\"/assets/{{coin.id}}.png\" alt=\"...\" style=\"height: 5em; width: 5em;\">\n      </a>\n    </div>\n    <div class=\"media- body\">\n      <h4 class=\"media-heading\">{{coin.name}}</h4>\n      <h4 class=\"media-heading\">{{coin.price_usd}}</h4>\n    </div>\n  </div>\n\n  <div class=\"col-sm-6\">\n    <div class=\"row\">\n      <div class=\"col-sm-6\">\n\n        <mat-list-item>\n          <mat-form-field>\n            <input matInput value=\"{{coin.amount_owned}}\" type=\"text\" (keyup)=\"multiply($event, coin)\" placeholder=\"Owned Amount\">\n          </mat-form-field>\n        </mat-list-item>\n\n      </div>\n      <div class=\"col-sm-6\">\n\n        <mat-list-item *ngIf=\"coin.amount_owned && coin.amount_owned != 0\">\n          {{formatMoney(coin)}}\n        </mat-list-item>\n\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -383,6 +383,8 @@ module.exports = module.exports.toString();
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HoldingComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_coin__ = __webpack_require__("../../../../../src/app/models/coin.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_numeral__ = __webpack_require__("../../../../numeral/numeral.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_numeral___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_numeral__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -392,6 +394,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 var HoldingComponent = (function () {
@@ -408,6 +411,9 @@ var HoldingComponent = (function () {
             coin.amount_owned = null;
         }
         this.coinOwnedEvent.emit(coin);
+    };
+    HoldingComponent.prototype.formatMoney = function (coin) {
+        return __WEBPACK_IMPORTED_MODULE_2_numeral__(coin.amount_owned * coin.price_usd).format('$0,0.00');
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Input */])(),
