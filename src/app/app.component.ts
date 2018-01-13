@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
               m.amount_owned = n.amount_owned;
             }
           });
-        })
+        });
         this.allCoins = data;
 
       },

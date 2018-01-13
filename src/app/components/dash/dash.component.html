@@ -6,7 +6,7 @@
       <mat-card>
         <div class="search">
           <mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" [disabled]="checked" placeholder="Filter">
+            <input matInput id="search-filter" (keyup)="applyFilter($event.target.value)" [disabled]="checked" placeholder="Filter">
           </mat-form-field>
           <mat-checkbox [(ngModel)]="checked">Show Checked Only</mat-checkbox>
         </div>

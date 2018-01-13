@@ -9,7 +9,7 @@ export class CoinmarketcapService {
   }
 
   getPrices() {
-    return this.http.get('https://api.coinmarketcap.com/v1/ticker/');
+    return this.http.get('https://api.coinmarketcap.com/v1/ticker/?limit=200');
   }
 
 }

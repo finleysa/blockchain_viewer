@@ -37,14 +37,16 @@ export class HoldingsComponent implements OnInit {
 
   ngOnInit() {
 
-    // get total after allCoins is set
-    let timer = setInterval(
-      () => {
-        if (this.allCoins) {
-          this.totalMoneys();
-          clearInterval(timer);
-        }
-      }, 100);
+    this.totalMoneys();
+
+    // // get total after allCoins is set
+    // let timer = setInterval(
+    //   () => {
+    //     if (this.allCoins) {
+    //       this.totalMoneys();
+    //       clearInterval(timer);
+    //     }
+    //   }, 100);
   }
 
   totalMoneys() {

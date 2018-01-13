@@ -13,6 +13,7 @@ export class DashComponent implements OnInit {
   _allCoins: Array<Coin>;
   _checked = false;
   updateCount = 0;
+  filterValue = '';
   @Output() coinToggleEvent = new EventEmitter();
 
   displayedColumns = ['add', 'name', 'price', 'percent_change_1h', 'percent_change_24h', 'percent_change_7d'];
@@ -21,6 +22,7 @@ export class DashComponent implements OnInit {
   @Input()
   set allCoins(coins: Array<Coin>) {
     this._allCoins = coins;
+    this.applyFilter(this.filterValue);
     if (this.updateCount <= 2) {
       this.updateCount++;
       this.dataSource = new MatTableDataSource<Coin>(this._allCoins);
@@ -55,6 +57,7 @@ export class DashComponent implements OnInit {
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.filterValue = filterValue;
     this.dataSource.filter = filterValue;
   }
 
