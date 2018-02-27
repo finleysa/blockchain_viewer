@@ -16,6 +16,7 @@ export class DashComponent {
   filterValue = '';
   displayedColumns = ['add', 'name', 'price', 'percent_change_1h', 'percent_change_24h', 'percent_change_7d'];
   dataSource = new MatTableDataSource<Coin>(this._allCoins);
+  
   @Output() coinToggleEvent = new EventEmitter();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -30,11 +31,15 @@ export class DashComponent {
     }
   }
 
-  constructor() {
-  }
-
   get allCoins() {
     return this._allCoins;
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  constructor() {
   }
 
   set checked(checked: boolean) {
@@ -49,10 +54,6 @@ export class DashComponent {
 
   get checked() {
     return this._checked;
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
   }
 
   applyFilter(filterValue: string) {

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { CoinmarketcapService } from '../../services/coinmarketcap.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,7 +8,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   @Output() clearCoinStorage = new EventEmitter();
-  constructor() { }
+  constructor(private cmcService: CoinmarketcapService) { }
 
   ngOnInit() {
   }
@@ -15,5 +16,10 @@ export class NavbarComponent implements OnInit {
   clearStorage() {
     localStorage.setItem('savedCoins', '');
     this.clearCoinStorage.emit();
+  }
+
+  refresh() {
+    console.log("refesh clicked")
+    this.cmcService.getPrices();
   }
 }
