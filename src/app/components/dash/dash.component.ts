@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { Coin } from '../../models/coin';
 
 import * as numeral from 'numeral';
@@ -9,15 +9,15 @@ import * as numeral from 'numeral';
   templateUrl: './dash.component.html',
   styleUrls: ['./dash.component.less']
 })
-export class DashComponent implements OnInit {
+export class DashComponent {
   _allCoins: Array<Coin>;
   _checked = false;
   updateCount = 0;
   filterValue = '';
-  @Output() coinToggleEvent = new EventEmitter();
-
   displayedColumns = ['add', 'name', 'price', 'percent_change_1h', 'percent_change_24h', 'percent_change_7d'];
   dataSource = new MatTableDataSource<Coin>(this._allCoins);
+  @Output() coinToggleEvent = new EventEmitter();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   @Input()
   set allCoins(coins: Array<Coin>) {
@@ -26,8 +26,13 @@ export class DashComponent implements OnInit {
     if (this.updateCount <= 2) {
       this.updateCount++;
       this.dataSource = new MatTableDataSource<Coin>(this._allCoins);
+      this.dataSource.paginator = this.paginator;
     }
   }
+
+  constructor() {
+  }
+
   get allCoins() {
     return this._allCoins;
   }
@@ -46,12 +51,8 @@ export class DashComponent implements OnInit {
     return this._checked;
   }
 
-
-  constructor() {
-  }
-
-  ngOnInit() {
-
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   applyFilter(filterValue: string) {

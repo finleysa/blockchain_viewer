@@ -10,13 +10,8 @@ import { HoldingsComponent } from './components/holdings/holdings.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatGridListModule, MatIconModule,
-  MatInputModule, MatListModule,
-  MatMenuModule, MatTableModule, MatToolbarModule
-} from '@angular/material';
 import { HoldingComponent } from './components/holdings/holding/holding.component';
-
+import { MaterialModules } from './material.modules'
 
 @NgModule({
   declarations: [
@@ -32,18 +27,7 @@ import { HoldingComponent } from './components/holdings/holding/holding.componen
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatMenuModule,
-    MatIconModule,
-    MatGridListModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatCardModule,
-    MatToolbarModule,
-    MatListModule,
-    MatCheckboxModule
+    MaterialModules 
   ],
   providers: [
     CoinmarketcapService

@@ -24,9 +24,6 @@ export class AppComponent implements OnInit {
     if (temp) { this.savedCoins = JSON.parse(temp); }
 
     this.startUpdate();
-    setInterval( () => {
-      this.startUpdate();
-    }, 20000);
   }
 
   startUpdate() {

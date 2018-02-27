@@ -1,11 +1,9 @@
 <app-navbar (clearCoinStorage)="clearCoinStorageHandler()"></app-navbar>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-6">
-      <app-holdings [allCoins]="allCoins" (coinOwnedEvent)="coinOwnedHandler($event)"></app-holdings>
-    </div>
-    <div class="col-lg-6">
-      <app-dash [allCoins]="allCoins" (coinToggleEvent)="coinToggleHandler($event)"></app-dash>
-    </div>
-  </div>
-</div>
+<mat-tab-group>
+  <mat-tab label="Full List">
+    <app-dash [allCoins]="allCoins" (coinToggleEvent)="coinToggleHandler($event)"></app-dash>
+  </mat-tab>
+  <mat-tab label="Owned Coins">
+    <app-holdings [allCoins]="allCoins" (coinOwnedEvent)="coinOwnedHandler($event)"></app-holdings>
+  </mat-tab>
+</mat-tab-group>

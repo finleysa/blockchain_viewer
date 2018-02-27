@@ -1,65 +1,63 @@
-<div class="row">
-  <div class="col-sm-12">
+<div class="mat-container mat-elevation-z8">
 
-    <div class="mat-container mat-elevation-z8">
-
-      <mat-card>
-        <div class="search">
-          <mat-form-field>
-            <input matInput id="search-filter" (keyup)="applyFilter($event.target.value)" [disabled]="checked" placeholder="Filter">
-          </mat-form-field>
-          <mat-checkbox [(ngModel)]="checked">Show Checked Only</mat-checkbox>
-        </div>
-      </mat-card>
+  <mat-card>
+    <div class="search">
+      <mat-form-field>
+        <input matInput id="search-filter" (keyup)="applyFilter($event.target.value)" [disabled]="checked" placeholder="Filter">
+      </mat-form-field>
+      <mat-checkbox [(ngModel)]="checked">Show Checked Only</mat-checkbox>
     </div>
+  </mat-card>
+</div>
 
-    <div class="mat-container mat-elevation-z8">
+<div class="mat-container mat-elevation-z8">
+    <mat-paginator #paginator 
+      [length]="100"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+  <mat-table #table [dataSource]="dataSource">
+      
+      <ng-container matColumnDef="add">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let coin">
+          <button (click)="toggleCoin(coin)">
+            <i *ngIf="!coin.isMyCoin" class="fa fa-plus" aria-hidden="true" style="color: green"></i>
+            <i *ngIf="coin.isMyCoin" class="fa fa-minus" aria-hidden="true" style="color: red"></i>
+          </button>
+        </mat-cell>
+      </ng-container>
 
-     <mat-table #table [dataSource]="dataSource">
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let coin"> {{coin.name}} </mat-cell>
+      </ng-container>
 
-          <ng-container matColumnDef="add">
-            <mat-header-cell *matHeaderCellDef></mat-header-cell>
-            <mat-cell *matCellDef="let coin">
-              <button (click)="toggleCoin(coin)">
-                <i *ngIf="!coin.isMyCoin" class="fa fa-plus" aria-hidden="true" style="color: green"></i>
-                <i *ngIf="coin.isMyCoin" class="fa fa-minus" aria-hidden="true" style="color: red"></i>
-              </button>
-            </mat-cell>
-          </ng-container>
+      <!-- Weight Column -->
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+        <mat-cell *matCellDef="let coin"> {{coin.price_usd}} </mat-cell>
+      </ng-container>
 
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-            <mat-cell *matCellDef="let coin"> {{coin.name}} </mat-cell>
-          </ng-container>
+      <!-- Color Column -->
+      <ng-container matColumnDef="percent_change_1h">
+        <mat-header-cell *matHeaderCellDef> 1hr change </mat-header-cell>
+        <mat-cell *matCellDef="let coin" [ngClass]="coin.percent_change_1h < 0 ? 'red-text' : 'green-text'"> {{coin.percent_change_1h}} </mat-cell>
+      </ng-container>
 
-          <!-- Weight Column -->
-          <ng-container matColumnDef="price">
-            <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
-            <mat-cell *matCellDef="let coin"> {{coin.price_usd}} </mat-cell>
-          </ng-container>
+      <ng-container matColumnDef="percent_change_24h">
+        <mat-header-cell *matHeaderCellDef> 24h Change </mat-header-cell>
+        <mat-cell *matCellDef="let coin" [ngClass]="coin.percent_change_24h < 0 ? 'red-text' : 'green-text'"> {{coin.percent_change_24h}} </mat-cell>
+      </ng-container>
 
-          <!-- Color Column -->
-          <ng-container matColumnDef="percent_change_1h">
-            <mat-header-cell *matHeaderCellDef> 1hr change </mat-header-cell>
-            <mat-cell *matCellDef="let coin" [ngClass]="coin.percent_change_1h < 0 ? 'red-text' : 'green-text'"> {{coin.percent_change_1h}} </mat-cell>
-          </ng-container>
+      <ng-container matColumnDef="percent_change_7d">
+        <mat-header-cell *matHeaderCellDef> 7d Change </mat-header-cell>
+        <mat-cell *matCellDef="let coin" [ngClass]="coin.percent_change_7d < 0 ? 'red-text' : 'green-text'"> {{coin.percent_change_7d}} </mat-cell>
+      </ng-container>
 
-          <ng-container matColumnDef="percent_change_24h">
-            <mat-header-cell *matHeaderCellDef> 24h Change </mat-header-cell>
-            <mat-cell *matCellDef="let coin" [ngClass]="coin.percent_change_24h < 0 ? 'red-text' : 'green-text'"> {{coin.percent_change_24h}} </mat-cell>
-          </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
 
-          <ng-container matColumnDef="percent_change_7d">
-            <mat-header-cell *matHeaderCellDef> 7d Change </mat-header-cell>
-            <mat-cell *matCellDef="let coin" [ngClass]="coin.percent_change_7d < 0 ? 'red-text' : 'green-text'"> {{coin.percent_change_7d}} </mat-cell>
-          </ng-container>
-
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
-
-    </div>
-
-  </div>
 </div>
