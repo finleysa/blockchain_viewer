@@ -1,22 +1,35 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
-import { Coin } from '../../models/coin';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild
+} from "@angular/core";
+import { MatTableDataSource, MatPaginator } from "@angular/material";
+import { Coin } from "../../models/coin";
 
-import * as numeral from 'numeral';
+import * as numeral from "numeral";
 
 @Component({
-  selector: 'app-dash',
-  templateUrl: './dash.component.html',
-  styleUrls: ['./dash.component.less']
+  selector: "app-dash",
+  templateUrl: "./dash.component.html",
+  styleUrls: ["./dash.component.less"]
 })
 export class DashComponent {
   _allCoins: Array<Coin>;
   _checked = false;
   updateCount = 0;
-  filterValue = '';
-  displayedColumns = ['add', 'name', 'price', 'percent_change_1h', 'percent_change_24h', 'percent_change_7d'];
+  filterValue = "";
+  displayedColumns = [
+    "add",
+    "name",
+    "price",
+    "percent_change_1h",
+    "percent_change_24h",
+    "percent_change_7d"
+  ];
   dataSource = new MatTableDataSource<Coin>(this._allCoins);
-  
+
   @Output() coinToggleEvent = new EventEmitter();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -39,13 +52,12 @@ export class DashComponent {
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor() {
-  }
+  constructor() {}
 
   set checked(checked: boolean) {
-    console.log(checked)
+    console.log(checked);
     if (checked) {
-      this.dataSource.filter = 'true';
+      this.dataSource.filter = "true";
     } else {
       this.dataSource.filter = null;
     }
@@ -64,16 +76,12 @@ export class DashComponent {
   }
 
   toggleCoin(coin) {
-    console.log(coin.name)
+    console.log(coin.name);
     coin.isMyCoin = !coin.isMyCoin;
     this.coinToggleEvent.emit(coin);
   }
 
   moneyFormat(money: number) {
-    return numeral(money).format('$0,0.00');
-  }
-
-  myCoinsOnly() {
-    console.log("only");
+    return numeral(money).format("$0,0.00");
   }
 }
